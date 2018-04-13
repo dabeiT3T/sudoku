@@ -34,4 +34,12 @@ trait PrintGame {
                 $this->printBorder();
         }
     }
+
+    public function __toString()
+    {
+        return ShellColors::getColoredString('sudoku', 'light_green') .
+            ' v0.1 by ' .
+            ShellColors::getColoredString('dabei', 'light_blue') .
+            " wish u enjoy it: )\n";
+    }
 }

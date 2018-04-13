@@ -16,6 +16,5 @@ class Sudoku {
     public function __construct()
     {
         $this->initGame();
-        $this->playGame();
     }
 }
