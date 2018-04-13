@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+
+use Sudoku\Sudoku;
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$sdk = new Sudoku;
+$sdk->playGame();
