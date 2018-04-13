@@ -4,7 +4,7 @@ namespace Sudoku\Traits;
 
 trait InitGame {
 
-	private function getDiffNum($x, $y)
+    private function getDiffNum($x, $y)
     {
         $a = range(1, 9);
         // x-axis
@@ -79,7 +79,7 @@ trait InitGame {
 
     private function digBlanks()
     {
-    	
+        
     }
 
     private function initGame()

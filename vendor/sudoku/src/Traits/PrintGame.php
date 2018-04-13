@@ -5,7 +5,7 @@ namespace Sudoku\Traits;
 use Sudoku\ShellColors;
 
 trait PrintGame {
-	protected function printRow($row)
+    protected function printRow($row)
     {
         echo '|';
         foreach ($row as $key => $v) {
