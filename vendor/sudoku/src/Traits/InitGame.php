@@ -9,12 +9,12 @@ trait InitGame {
     private function initGame()
     {
         $this->fillBlanks();
-        // this store puzzle (which will be print)
+        // this store puzzle
         $this->puzzle       = $this->sudoku;
         $this->puzzleCols   = $this->cols;
         unset($this->cols);         // no need any more
         $this->digBlanks();
-        // this store player's fill
+        // this store player's fill (which will be print)
         $this->player       = $this->puzzle;
         $this->playerCols   = $this->puzzleCols;
     }
