@@ -39,20 +39,50 @@ trait PrintGame {
         //   '   | 1 2 3 | 4 5 6 | 7 8 9 |'
     }
 
+    protected function printHelp()
+    {
+        echo $this->__toString();
+        
+        $new    = ShellColors::getColoredString('new', 'dark_gray');
+        $reset  = ShellColors::getColoredString('reset', 'dark_gray');
+        $help   = ShellColors::getColoredString('help', 'dark_gray');
+        $chdif  = ShellColors::getColoredString('cd n', 'dark_gray');
+        $hl     = ShellColors::getColoredString('cow rol', 'dark_gray');
+        $fill   = ShellColors::getColoredString('cow rol n', 'dark_gray');
+        $quit   = ShellColors::getColoredString('q', 'dark_gray');
+
+        echo <<<_HELP_
+$chdif      => change difficult       $help => help      $quit     => quit
+$hl   => highlight col and row  $new  => new game  $reset => restart 
+$fill => set (cow, rol) number n
+_HELP_;
+    }
+
     protected function printResponse($res)
     {
-        echo ShellColors::getColoredString($res, 'light_red');
+        if ($res == 'help')
+            $this->printHelp();
+        else
+            echo "\n\n\n" . ShellColors::getColoredString($res, 'light_red');
+
         echo "\n";
     }
 
     protected function printTips()
     {
-        echo 'Enter (x y [number]) or (q) to quit:';
+        echo 'Enter (x y [number]) to fill blanks:';
+    }
+
+    protected function printLevel()
+    {
+        echo "\n" . ShellColors::getColoredString('Level ', 'dark_gray');
+        echo ShellColors::getColoredString($this->level[$this->difficult], 'light_cyan') . "\n\n";
     }
 
     protected function printTable($x = null, $y = null)
     {
         system('clear');
+        $this->printLevel();
         $this->printBorderNum();
         $this->printBorder();
         foreach ($this->player as $key => $row) {

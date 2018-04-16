@@ -17,6 +17,5 @@ trait InitGame {
         // this store player's fill
         $this->player       = $this->puzzle;
         $this->playerCols   = $this->puzzleCols;
-        unset($this->puzzleCols);   // no need any more
     }
 }

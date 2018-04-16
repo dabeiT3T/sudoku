@@ -23,6 +23,13 @@ class Sudoku {
     private $player     = [];
     private $playerCols = [];
 
+    private $difficult = 1;
+    private $level = [
+        1 => 'easy',
+        2 => 'medium',
+        3 => 'hard',
+    ];
+
     public function __construct()
     {
         $this->initGame();
