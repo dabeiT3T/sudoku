@@ -22,13 +22,15 @@ class Sudoku {
     // Player fill the blanks
     private $player     = [];
     private $playerCols = [];
-
+    // level
     private $difficult = 1;
     private $level = [
         1 => 'easy',
         2 => 'medium',
         3 => 'hard',
     ];
+    // highlight
+    private $hl;
 
     public function __construct()
     {

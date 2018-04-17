@@ -17,5 +17,7 @@ trait InitGame {
         // this store player's fill (which will be print)
         $this->player       = $this->puzzle;
         $this->playerCols   = $this->puzzleCols;
+        // no highlight
+        $this->hl = [null, null];
     }
 }

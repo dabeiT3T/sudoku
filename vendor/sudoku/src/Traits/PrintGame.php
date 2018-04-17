@@ -47,14 +47,14 @@ trait PrintGame {
         $reset  = ShellColors::getColoredString('reset', 'dark_gray');
         $help   = ShellColors::getColoredString('help', 'dark_gray');
         $chdif  = ShellColors::getColoredString('cl n', 'dark_gray');
-        $hl     = ShellColors::getColoredString('cow rol', 'dark_gray');
-        $fill   = ShellColors::getColoredString('cow rol n', 'dark_gray');
+        $hl     = ShellColors::getColoredString('col row', 'dark_gray');
+        $fill   = ShellColors::getColoredString('col row n', 'dark_gray');
         $quit   = ShellColors::getColoredString('q', 'dark_gray');
 
         echo <<<_HELP_
 $chdif      => change level           $new  => new game  $reset => restart
 $hl   => highlight col and row  $help => help      $quit     => quit
-$fill => set (cow, rol) number n
+$fill => set (col, row) number n
 _HELP_;
     }
 
@@ -79,7 +79,7 @@ _HELP_;
         echo ShellColors::getColoredString($this->level[$this->difficult], 'light_cyan') . "\n\n";
     }
 
-    protected function printTable($x = null, $y = null)
+    protected function printTable()
     {
         system('clear');
         $this->printLevel();
@@ -87,7 +87,7 @@ _HELP_;
         $this->printBorder();
         foreach ($this->player as $key => $row) {
             echo ' ' . ShellColors::getColoredString($key+1 . ' ', 'light_green');
-            $this->printRow($row, $x, $y, $key);
+            $this->printRow($row, $this->hl[0], $this->hl[1], $key);
             echo ' ' . ShellColors::getColoredString($key+1, 'light_green');
             echo "\n";
             if ($key % 3 == 2)

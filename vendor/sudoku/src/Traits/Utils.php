@@ -4,6 +4,13 @@ namespace Sudoku\Traits;
 
 trait Utils {
 
+    private function inRange($needle, $min, $max, $includeMin = true, $includeMax = true)
+    {
+        $gt = $includeMin? $needle >= $min: $needle > $min;
+        $lt = $includeMax? $needle <= $max: $needle < $max;
+        return ($gt && $lt);
+    }
+
     private function getDiffList($x, $y, $rows, $cols)
     {
         $a = range(1, 9);
