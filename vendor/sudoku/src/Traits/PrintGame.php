@@ -46,14 +46,14 @@ trait PrintGame {
         $new    = ShellColors::getColoredString('new', 'dark_gray');
         $reset  = ShellColors::getColoredString('reset', 'dark_gray');
         $help   = ShellColors::getColoredString('help', 'dark_gray');
-        $chdif  = ShellColors::getColoredString('cd n', 'dark_gray');
+        $chdif  = ShellColors::getColoredString('cl n', 'dark_gray');
         $hl     = ShellColors::getColoredString('cow rol', 'dark_gray');
         $fill   = ShellColors::getColoredString('cow rol n', 'dark_gray');
         $quit   = ShellColors::getColoredString('q', 'dark_gray');
 
         echo <<<_HELP_
-$chdif      => change difficult       $help => help      $quit     => quit
-$hl   => highlight col and row  $new  => new game  $reset => restart 
+$chdif      => change level           $new  => new game  $reset => restart
+$hl   => highlight col and row  $help => help      $quit     => quit
 $fill => set (cow, rol) number n
 _HELP_;
     }

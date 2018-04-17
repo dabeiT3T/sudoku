@@ -11,24 +11,45 @@ trait PlayGame {
         $this->playerCols   = $this->puzzleCols;
     }
 
-    private function handleGame($stdin)
+    private function changeLevel($level)
     {
-
-        if ($stdin == 'new') {
+        if ($level >= 1 && $level <= 3) {
+            $this->difficult = $level;
             $this->initGame();
             return ['', []];
         }
 
-        if ($stdin == 'reset') {
-            $this->restartGame();
-            return ['', []];
+        return ['Parameter for changing level is illegal.', []];
+    }
+
+    private function handleGame($stdin)
+    {
+
+        switch ($stdin) {
+            // new game
+            case 'new':
+                $this->initGame();
+                return ['', []];
+            // restart
+            case 'reset':
+                $this->restartGame();
+                return ['', []];
+            // help
+            case 'h':
+            case 'help':
+                return ['help', []];
+            // input nothing
+            case '':
+                return ['', []];
         }
 
-        if ($stdin == 'h' || $stdin == 'help')
-            return ['help', []];
+        if (substr($stdin, 0, 2) == 'cl') {
+            $level = intval(substr($stdin, 2));
+            return $this->changeLevel($level);
+        }
 
-
-        return ['(12, 3) is out of range', []];
+        // return ['(12, 3) is out of range', []];
+        return ['Undefined commmand, enter (h or help) to get help.', []];
     }
 
     public function playGame()
@@ -53,7 +74,7 @@ trait PlayGame {
              * handle input
              * 'col row n'  => set (cow, rol) number n
              * 'col row'    => highlight col and row
-             * 'cd n'       => change difficult (level 1-3 as easy-hard)
+             * 'cl n'       => change level (level 1-3 as easy-hard)
              * 'new'        => new game
              * 'reset'      => restart
              * 'h' or 'help'=> help
