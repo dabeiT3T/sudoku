@@ -30,7 +30,7 @@ trait PlayGame {
         if ($this->inRange($col, 1, 9) && $this->inRange($row, 1, 9)) {
             $this->hl = [$col - 1, $row - 1];
             return "Highlighted ($col, $row)";
-        } else if ($this->hl[0] && $this->hl[1]) {
+        } else if ($this->hl[0] !== null && $this->hl[1] !== null) {
             $col = $this->hl[0] + 1;
             $row = $this->hl[1] + 1;
             $this->hl = [null, null];
@@ -38,6 +38,11 @@ trait PlayGame {
         }
 
         return 'Parameters for highlight is illegal.';
+    }
+
+    private function gameFinish()
+    {
+        return false;
     }
 
     private function fillNumber($nums)
@@ -53,7 +58,10 @@ trait PlayGame {
         ) {
             $this->player[$row-1][$col-1] = $num;
             $this->playerCols[$col-1][$row-1] = $num;
-            return "Set ($col, $row) number $num";
+            if ($this->gameFinish())
+                return true;
+            else
+                return "Set ($col, $row) number $num";
         }
 
         return 'Parameters for setting number is illegal.';
