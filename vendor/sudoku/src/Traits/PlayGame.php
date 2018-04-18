@@ -29,7 +29,12 @@ trait PlayGame {
         
         if ($this->inRange($col, 1, 9) && $this->inRange($row, 1, 9)) {
             $this->hl = [$col - 1, $row - 1];
-            return "Highlight ($col, $row)";
+            return "Highlighted ($col, $row)";
+        } else if ($this->hl[0] && $this->hl[1]) {
+            $col = $this->hl[0] + 1;
+            $row = $this->hl[1] + 1;
+            $this->hl = [null, null];
+            return "Unhighlighted ($col, $row)";
         }
 
         return 'Parameters for highlight is illegal.';

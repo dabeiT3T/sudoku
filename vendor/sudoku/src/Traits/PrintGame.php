@@ -5,23 +5,42 @@ namespace Sudoku\Traits;
 use Sudoku\ShellColors;
 
 trait PrintGame {
+
+    private function getColoredNum($str, $num, $r, $c, $bgc = null)
+    {
+        // give user fill num color
+        if ($this->puzzle[$r][$c] == ' ')
+            echo ShellColors::getColoredString($str, 'blue', $bgc ?? 'light_gray');
+        else
+            echo ShellColors::getColoredString($str, 'black', $bgc ?? '');
+    }
+
     protected function printRow($row, $x, $y, $r)
     {
+        // maybe highlight same selected num in the future:)
+        $num = 0;
         echo '|';
         foreach ($row as $key => $v) {
-            if ($x === $key || $r === $y) {
-                echo ShellColors::getColoredString(' '. $v, 'black', 'green');
-            } else {
-                if ($v == ' ') {
+            // highlight x-axis
+            if ($r === $y)
+                $this->getColoredNum(' '. $v, $num, $r, $key, 'cyan');
+            // highlight y-axis
+            else if ($x === $key)
+                $this->getColoredNum(' '. $v . ' ', $num, $r, $key,  'cyan');
+            else {
+                // highlight adjust
+                if ($x !== $key - 1)
                     echo ' ';
-                    echo ShellColors::getColoredString($v, 'black', 'light_gray');
-                } else
-                    echo ShellColors::getColoredString(' ' . $v, 'black');
+                // normal print
+                $this->getColoredNum($v, $num, $r, $key);
             }
 
 
             if ($key % 3 == 2) {
-                echo ShellColors::getColoredString(' ', 'black');
+                if ($r === $y)
+                    echo ShellColors::getColoredString(' ', 'black', 'cyan');
+                else
+                    echo ShellColors::getColoredString(' ', 'black');
                 echo '|';
             }
         }
