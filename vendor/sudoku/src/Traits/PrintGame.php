@@ -9,8 +9,12 @@ trait PrintGame {
     private function getColoredNum($str, $num, $r, $c, $bgc = null)
     {
         // give user fill num color
-        if ($this->puzzle[$r][$c] == ' ')
-            echo ShellColors::getColoredString($str, 'blue', $bgc ?? 'light_gray');
+        if ($this->puzzle[$r][$c] == ' ') {
+            if ($this->isBlankRepeat($num, $c, $r, $this->player, $this->playerCols))
+                echo ShellColors::getColoredString($str, 'red', $bgc ?? 'light_gray');
+            else
+                echo ShellColors::getColoredString($str, 'blue', $bgc ?? 'light_gray');
+        }
         else
             echo ShellColors::getColoredString($str, 'black', $bgc ?? '');
     }
@@ -18,21 +22,21 @@ trait PrintGame {
     protected function printRow($row, $x, $y, $r)
     {
         // maybe highlight same selected num in the future:)
-        $num = 0;
+        $hlNum = 0;
         echo '|';
         foreach ($row as $key => $v) {
             // highlight x-axis
             if ($r === $y)
-                $this->getColoredNum(' '. $v, $num, $r, $key, 'cyan');
+                $this->getColoredNum(' '. $v, $v, $r, $key, 'cyan');
             // highlight y-axis
             else if ($x === $key)
-                $this->getColoredNum(' '. $v . ' ', $num, $r, $key,  'cyan');
+                $this->getColoredNum(' '. $v . ' ', $v, $r, $key,  'cyan');
             else {
                 // highlight adjust
                 if ($x !== $key - 1)
                     echo ' ';
                 // normal print
-                $this->getColoredNum($v, $num, $r, $key);
+                $this->getColoredNum($v, $v, $r, $key);
             }
 
 
@@ -90,6 +94,27 @@ _HELP_;
     protected function printTips()
     {
         echo 'Enter (x y [number]) to fill blanks:';
+    }
+
+    protected function printGame($res)
+    {
+        // print table
+        $this->printTable();
+        // print result
+        $this->printResponse($res);
+        // tips
+        $this->printTips();
+    }
+
+    protected function printGameOver()
+    {
+        // print table
+        $this->printTable();
+        // print result
+        $res = 'Congratulations! U win!';
+        $this->printResponse($res);
+        // tips
+        echo 'Enter any keys to continue:';
     }
 
     protected function printLevel()

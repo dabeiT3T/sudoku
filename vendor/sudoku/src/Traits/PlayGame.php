@@ -40,9 +40,17 @@ trait PlayGame {
         return 'Parameters for highlight is illegal.';
     }
 
-    private function gameFinish()
+    private function gameOver(&$res)
     {
-        return false;
+        $this->printGameOver();
+        $stdin = trim(fgets(STDIN));
+        $this->initGame();
+        $res = '';
+    }
+
+    private function isGameFinished()
+    {
+        return $this->player == $this->sudoku;
     }
 
     private function fillNumber($nums)
@@ -53,15 +61,19 @@ trait PlayGame {
 
         if ($this->inRange($col, 1, 9) && 
             $this->inRange($row, 1, 9) &&
-            $this->inRange($num, 1, 9) &&
+            $this->inRange($num, 0, 9) &&
             $this->puzzle[$row-1][$col-1] === ' '
         ) {
-            $this->player[$row-1][$col-1] = $num;
-            $this->playerCols[$col-1][$row-1] = $num;
-            if ($this->gameFinish())
+            $this->player[$row-1][$col-1] = $num == 0? ' ': $num;
+            $this->playerCols[$col-1][$row-1] = $num == 0? ' ' : $num;
+            if ($this->isGameFinished())
                 return true;
-            else
-                return "Set ($col, $row) number $num";
+            else {
+                if ($num != 0)
+                    return "Set ($col, $row) number $num";
+                else
+                    return "Reset ($col, $row)";
+            }
         }
 
         return 'Parameters for setting number is illegal.';
@@ -110,16 +122,11 @@ trait PlayGame {
         $res = '';
         do {
             // gameover
-            if ($res === true) {
-                   
-            }
+            if ($res === true)
+                $this->gameOver($res);
 
-            // print table
-            $this->printTable();
-            // print result
-            $this->printResponse($res);
-            // tips
-            $this->printTips();
+            $this->printGame($res);
+
             // get user input
             $stdin = trim(fgets(STDIN));
             /**

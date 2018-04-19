@@ -7,7 +7,7 @@ trait DigBlanks {
     
     private function digBlanks()
     {
-        for ($i=0; $i < 30; $i++) { 
+        for ($i=0; $i < 3; $i++) { 
             $x = mt_rand(0, 8);
             $y = mt_rand(0, 8);
 

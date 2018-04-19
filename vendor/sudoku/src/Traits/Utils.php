@@ -42,22 +42,28 @@ trait Utils {
     {
         // use this when digging and filling
         // array[$y][$x]
+        // del element from array
+        $rows[$y][$x] = ' ';
+        $cols[$x][$y] = ' ';
+        $flag = false;
 
         // x-axis
-        if (in_array($num, $rows[$y]) !== false)
-            return false;
-        // y-axis
+        if (in_array($num, $rows[$y]) !== false) 
+            $flag = true;
+        // // y-axis
         if (in_array($num, $cols[$x]) !== false)
-            return false;
+            $flag = true;
         // in-9-blanks
         $c = floor($y/3)*3;
         $r = floor($x/3)*3;
         for ($i=$c; $i < ($c+3); $i++) {
             if (isset($rows[$i])) {
                 if (in_array($num, array_slice($rows[$i], $r, 3)) !== false)
-                    return false;
+                    return true;
             }
         }
-        return true;
+
+        // no need to recover $rows and $cols 
+        return $flag;
     }
 }
