@@ -2,6 +2,8 @@
 
 namespace Sudoku\Traits;
 
+use Sudoku\SudokuSolver;
+
 trait DigBlanks {
 
     

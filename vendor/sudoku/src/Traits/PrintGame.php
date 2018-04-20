@@ -93,7 +93,7 @@ _HELP_;
 
     protected function printTips()
     {
-        echo 'Enter (x y [number]) to fill blanks:';
+        echo 'Enter (x y [number]) to fill blanks: ';
     }
 
     protected function printGame($res)
@@ -114,7 +114,7 @@ _HELP_;
         $res = 'Congratulations! U win!';
         $this->printResponse($res);
         // tips
-        echo 'Enter any keys to continue:';
+        echo 'Enter any keys to continue: ';
     }
 
     protected function printLevel()
